@@ -2,21 +2,38 @@ import os
 import pandas as pd
 from datetime import datetime
 
-urldata=pd.read_csv('',header=None)
+urldata=pd.read_csv('C:\\Users\\Administrator\\Desktop\\下载链接.txt',header=None)
 
+
+
+#第一段代码 
+#功能：批量下载到chunks视频
 time1=datetime.now()
 for i in range(0,len(urldata),1):
     time3=datetime.now()
     print('一共',len(urldata),'个视频下载')
     print('正在下载第',i+1,'个视频')
     url=urldata[i]
-    downloadfile=''
+    downloadfile='C:\\Users\\Administrator\\Desktop\\test2\\'
     os.system('you-get -o '+downloadfile+' '+str(url))
     time4=datetime.now()
     print('第',i+1,'个视频下载完成,耗时',time4-time3,'秒')
 
- #转换格式转换为mp3
-   
+time2=datetime.now()
+print('总耗时',time2-time1)
+
+#第二段代码 
+#批量转换格式转换为mp3并删除mp4
+
+to_trans_file="C:\\Users\\Administrator\\Desktop\\test2\\chunks\\"
+to_save_trans="C:\\Users\\Administrator\\Desktop\\test2\\转wav\\"
+import subprocess
+for i in os.listdir(to_trans_file):
+    trans_name=to_trans_file+i
+    save_name=to_save_trans+os.path.splitext(i)[0]+'.pcm'
+    code='ffmpeg -y -i ' +trans_name+' -acodec pcm_s16le -f s16le -ac 1 -ar 16000 '+save_name
+    subprocess.check_output(code,shell=True)
+print('pcm格式转换完成')   
 
  #删除掉原视频
 
