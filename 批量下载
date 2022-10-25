@@ -1,0 +1,24 @@
+import os
+import pandas as pd
+from datetime import datetime
+
+urldata=pd.read_csv('',header=None)
+
+time1=datetime.now()
+for i in range(0,len(urldata),1):
+    time3=datetime.now()
+    print('一共',len(urldata),'个视频下载')
+    print('正在下载第',i+1,'个视频')
+    url=urldata[i]
+    downloadfile=''
+    os.system('you-get -o '+downloadfile+' '+str(url))
+    time4=datetime.now()
+    print('第',i+1,'个视频下载完成,耗时',time4-time3,'秒')
+
+ #转换格式转换为mp3
+   
+
+ #删除掉原视频
+
+time2=datetime.now()
+print('总耗时',time2-time
